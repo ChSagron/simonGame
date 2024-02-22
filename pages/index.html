@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Game</title>
+    <link rel="stylesheet" href="..\style\css.css">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew&display=swap"> -->
+</head>
+
+<body class="computerTurn">
+
+    
+    <div id="playerScore" class="side whiteText">
+        <span id="maxScore" class="spanInfo" data-id="nothing"></span>
+        <p id="preScores" data-id="nothing"></p>
+    </div>
+
+
+    <div id="game">
+
+        <button id="indicator" class="displayFlex">
+            <div id="countdown">
+                <div id="countdownNumber"></div>
+                <svg>
+                    <circle id="circle" r="6vw" cx="7vw" cy="7vw"></circle>
+                </svg>
+            </div>
+        </button>
+        <button id="buttonYellow0" class="buttonGame"></button>
+        <button id="buttonGreen1" class="buttonGame"></button>
+        <button id="buttonRed3" class="buttonGame"></button>
+        <button id="buttonBlue2" class="buttonGame"></button>
+
+    </div>
+
+
+    <div id="info" class="side">
+        <p id="helloName" class="whiteText"></p>
+        <span id="levelInfo" class="spanInfo whiteText"></span>
+    </div>
+
+
+    <div id="popupSuccess" class="popup">
+        <h1 data-act="popupSuccessH"></h1>
+        <p data-act="popupSuccessP"></p>
+        <button class="popupAct" data-act="again"></button>
+        <button class="popupAct" data-act="extra"></button>
+        <button class="popupAct" data-act="exit"></button>
+    </div>
+
+
+    <div id="popupFailure" class="popup">
+        <h1 data-act="popupFailureH"></h1>
+        <p data-act="popupFailureP"></p>
+        <button class="popupAct" data-act="again"></button>
+        <button class="popupAct" data-act="exit"></button>
+    </div>
+
+    <div id="popupTimeOver" class="popup">
+        <h1 data-act="popupTimeOverH"></h1>
+        <p data-act="popupTimeOverP"></p>
+        <button class="popupAct" data-act="again"></button>
+        <button class="popupAct" data-act="exit"></button>
+    </div>
+
+
+    <script src="..\scripts\data.js"></script>
+    <script src="..\scripts\js.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+/* @font-face {
+    font-family: 'Noto Sans Hebrew';
+    font-style: NORMAL_OR_ITALIC;
+    font-weight: NUMERIC_WEIGHT_VALUE;
+    src: url(Noto_Sans_Hebrew.woff2) format('woff2');
+} */
+
+
+/* ------------------ general -------------- */
+:root {
+    --buttonSize: 17vw;
+    --gap: 1.5vw;
+    --yellow: #FFFF00;
+    --green: #00FF00;
+    --blue: #0092FF;
+    --red: #FF1C53;
+    --darkBlue: #00007F;
+    --veryDarkBlue: #000039;
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--veryDarkBlue);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+.rtl {
+    direction: rtl;
+}
+
+body .computerTurn {
+    pointer-events: none;
+}
+
+.whiteText {
+    color: white;
+    text-align: center;
+}
+
+p {
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+
+/* ---------------- game board ---------------- */
+#game {
+    rotate: 45deg;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+    width: calc(2 * var(--buttonSize) + var(--gap));
+    height: calc(2 * var(--buttonSize) + var(--gap));
+    position: relative;
+    margin: 0;
+    flex-direction: row-reverse;
+    direction: rtl;
+}
+
+#buttonYellow0 {
+    background-color: var(--yellow);
+    border-radius: 100% 0 0 0;
+    border-color: #949400;
+}
+
+#buttonGreen1 {
+    background-color: var(--green);
+    border-radius: 0 100% 0 0;
+    border-color: #009000;
+}
+
+#buttonBlue2 {
+    background-color: var(--blue);
+    border-radius: 0 0 100% 0;
+    border-color: #00508e;
+}
+
+#buttonRed3 {
+    background-color: var(--red);
+    border-radius: 0 0 0 100%;
+    border-color: #921031;
+}
+
+.buttonGame {
+    height: var(--buttonSize);
+    width: var(--buttonSize);
+    z-index: -1;
+    border-width: 1vw;
+    box-shadow: inset 0 0 var(--gap) black;
+    filter: brightness(0.7);
+}
+
+/* 
+    // לחצן הנוצר מקו
+    #buttonYellow1 {
+    height: 30vh;
+    width: 30vh;
+    border-radius: 100% 0 0 0;
+    border-width: 13.5vh 0 0 13.5vh;;
+    border-style: solid;
+    border-color: #FFFF00;
+    box-sizing: border-box;
+}
+*/
+
+#indicator {
+    background-color: var(--darkBlue);
+    border-radius: 100%;
+    height: var(--buttonSize);
+    width: var(--buttonSize);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: var(--gap) solid var(--veryDarkBlue);
+    filter: brightness(1);
+    padding: 0;
+}
+
+.on {
+    box-shadow: 0 0 var(--gap) 0 #ffffff;
+    /* box-shadow: inset 0 0 var(--gap) black; */
+    filter: brightness(1);
+}
+
+
+
+/* -------------- game board > count down ---------------- */
+#countdown {
+    display: flex;
+    position: relative;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    rotate: -45deg;
+    /* background-color: gray; */
+    border-radius: 100%;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 6vw;
+}
+
+#countdownNumber {
+    color: #0000c5;
+    display: inline-block;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+    stroke-dasharray: 37.5vw;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: calc(0.3*var(--gap));
+    stroke: #0077ff;
+    fill: none;
+}
+
+.animated {
+    animation: countdown 10s linear forwards;
+
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+
+    to {
+        stroke-dashoffset: 37.5vw;
+    }
+}
+
+
+
+/* ----------------- sides [right & left] ---------------- */
+.side {
+    width: 10vw;
+    box-sizing: border-box;
+    margin: 5%;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+}
+
+.spanInfo {
+    display: flex;
+    border: calc(0.3*var(--gap)) solid var(--darkBlue);
+    padding: calc(0.3*var(--gap)) var(--gap);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    box-sizing: border-box;
+    margin-top: 0.5vw;
+}
+
+
+
+
+
+/* -------------- popups ----------------- */
+.popup {
+    display: none;
+    position: absolute;
+    outline-offset: calc(0.6 * var(--gap));
+    border-radius: 100%;
+    background-color: var(--yellow);
+    z-index: 2;
+    width: calc(2 * var(--buttonSize) + 2* var(--gap));
+    height: calc(2 * var(--buttonSize) + 2* var(--gap));
+    padding: calc(1.7*var(--gap));
+    box-sizing: border-box;
+}
+
+#popupSuccess {
+    outline: calc(0.35*var(--gap)) solid var(--red);
+}
+
+#popupFailure,
+#popupTimeOver {
+    outline: calc(0.35*var(--gap)) solid var(--blue);
+}
+
+#popupFailure button,
+#popupTimeOver button {
+    color: var(--blue);
+}
+
+#popupSuccess button {
+    color: var(--red);
+}
+
+.displayFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup h1 {
+    margin-top: 0vw;
+    font-size: 7vw;
+    font-weight: 900;
+    line-height: 6vw;
+    margin-bottom: 0.5vw;
+    color: var(--darkBlue);
+}
+
+.popup p {
+    font-size: 2.5vw;
+    font-weight: 600;
+    margin-bottom: 1.5vw;
+
+}
+
+.popup button {
+    padding: 0.6vw;
+    width: 15vw;
+    background-color: var(--darkBlue);
+    border: 0;
+    margin: 0.2vw 0;
+    font-size: 2vw;
+}
+
+.popup button:hover,
+.popup button:focus {
+    background-color: #0000c5;
+}
+
+/* .focus{
+    background-color: #0000c5;
+} */
+
+
+
+
+/* ---------------- welcome page ---------------- */
+#welcome {
+    direction: ltr;
+    font-size: 10vw;
+    line-height: 9vw;
+}
+
+form {
+    gap: var(--gap);
+}
+
+form>* {
+    background-color: var(--darkBlue);
+    border: 0;
+    width: 100%;
+    margin: 0;
+    padding: 1vw;
+    box-sizing: border-box;
+    font-size: 1rem;
+
+}
+
+input {
+    text-align: center;
+}
+
+#welcomeDiv button:hover,
+#welcomeDiv input:focus {
+    outline: calc(0.15*var(--gap)) solid var(--red);
+    filter: brightness(1.5);
+    color: #FF1C53
+}
+
+
+/* ------------ Responsiveness ------------ */
+@media only screen and (orientation: portrait) {
+    body {
+        flex-direction: column-reverse;
+    }
+
+    .side {
+        width: calc(2 * var(--buttonSize) + var(--gap));
+        height: 10%;
+    }
+
+}
